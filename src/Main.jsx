@@ -23,6 +23,7 @@ const Main = ({setShowModal}) => {
   }
   useEffect(()=>{
     setData(data1)
+    return ()=> clearTimeout()
   },[])
   return (
     <section className='h-[calc(100%-5rem)]  p-5 bg-gray-50 overflow-hidden'>
