@@ -1,0 +1,9 @@
+.rounded{
+  @apply rounded-full border-2 border-gray-50 w-10 h-10 p-1 bg-white me-2 flex justify-center items-center
+}
+.search{
+  @apply bg-gray-50 rounded-md outline-none border-0 flex justify-between items-center 
+}
+.center{
+  @apply flex justify-center items-center 
+}

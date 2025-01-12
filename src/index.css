@@ -1,0 +1,16 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body , #root{
+  width: 100%;
+  height: 100%;
+}
+/* .rounded{
+  @apply rounded-full border-2 border-grey-50 w-10 h-10 p-1 bg-white me-2 flex justify-center items-center
+} */
