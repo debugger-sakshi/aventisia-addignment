@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Search from './assets/images/Search1.png';
 import Filter from './assets/images/Filter.png';
 import Calender from './assets/images/calender.png';
@@ -7,10 +7,23 @@ import { column } from './column';
 import {modelData} from './model_data.js'
 import Modal from './Modal.jsx';
 const Main = ({setShowModal}) => {
+  let timer = null
   const [searchval, setSearchval] = useState()
-  const handlerSearch = ()=>{
-
+  const data1 = useMemo(()=> modelData, [])
+  const [data, setData] = useState([])
+  const handlerSearch = (val)=>{
+    setSearchval(val)
+      if(timer) timer = null
+      timer = setTimeout(()=>{
+        setData(prev => {
+          if(searchval == "") return modelData
+          return prev.filter(ele => ele.id.includes(val) || ele.model_name.toLowerCase().includes(val.toLowerCase()))
+        })
+      },100)
   }
+  useEffect(()=>{
+    setData(data1)
+  },[])
   return (
     <section className='h-[calc(100%-5rem)]  p-5 bg-gray-50 overflow-hidden'>
       <div className='h-full w-full shadow-md bg-white py-5 px-4 overflow-auto'>
@@ -28,7 +41,7 @@ const Main = ({setShowModal}) => {
             className='w-full h-full search ps-7 text-sm' 
             placeholder='Search by Name, ID'
             value={searchval}
-            onChange={(e)=> setSearchval(e.target.value)}
+            onChange={(e)=> handlerSearch(e.target.value)}
              />
           </div>
           <div className='search col-span-1 px-4'>
@@ -42,7 +55,7 @@ const Main = ({setShowModal}) => {
         </div>
        
           <Table
-           tableData={modelData}
+           tableData={data}
            column={column}
             />
       
